@@ -3,19 +3,32 @@ PROJECT NAME
 vtkFLTK-V8.x-F1.4
 
 
-GENERAL
+AUTHORS
 -------
-This repository contains code which facilitates the use of VTK 8.x to produce
-2D or 3D visualizations in a FLTK 1.4 window (Fl_VTK_Window) that is derived
-from Fl_GL_Window. This means you can use a modern VTK version in modern FLTK
-user interfaces that employ the usual FLTK control widgets like buttons, etc.
-
-This repository includes code that is either based on or copied from code in
-the vtkFLTK-0.6.1 project on SourceForge, copyright (c) 2002 - 2004 Sean
-McInerney. The borrowed code has been modified as necessary to port it for use
-with FLTK 1.4 and VTK 8.x.
+The author of the original vtkFLTK project software is Sean McInerney.
 
 See https://sourceforge.net/projects/vtkfltk.
+
+I (Paul Douglas Hahn, CompIntense HPC, LLC) have made certain modifications to
+that original code, plus I have written some new code as well, for inclusion in
+the current project repository.
+
+
+GENERAL
+-------
+This repository contains software which facilitates the use of VTK 8.x to produce
+2D or 3D visualizations in a FLTK 1.4 window (Fl_VTK_Window) that is derived
+from a Fl_GL_Window. This means you can use a fairly modern VTK version in modern
+FLTK user interfaces that employ the usual FLTK control widgets like buttons, etc.
+
+This repository includes source code that is based on source code copied from the
+vtkFLTK-0.6.1 project on SourceForge, copyright (c) 2002 - 2004 Sean McInerney.
+To various extents, the borrowed code has been modified and extensions made as
+necessary to port it for use with FLTK 1.4 and VTK 8.x. Nevertheless, the original
+code still provides the core functionality, and I congratulate the original author
+for his very good work. It solves a big problem in my world: namely, how to use
+VTK with a free GUI toolkit (FLTK) that has terms of use friendly to commercial
+application development.
 
 
 LICENSE
@@ -68,7 +81,7 @@ PREREQUISITES
 
 BUILDING
 --------
-After installation of this code and all prerequisites, modify the "Makefile"
+After installation of this code and all prerequisites, modify "Makefile.config"
 in the top-level project directory with the actual paths for your local FLTK
 and VTK installation, as well as your target installation directory.
 
@@ -94,7 +107,7 @@ directory, including any example programs.
 
 DISCLAIMER
 ----------
-The code in this project is being supplied with the hope that it might be
+The software in this project is being supplied with the hope that it might be
 helpful to those who might want to try to use VTK with FLTK in EXPERIMENTAL
 CIRCUMSTANCES ONLY.
 
@@ -104,8 +117,8 @@ for my own purposes, anyway). I have also not tried to deal with performance
 issues, if any.
 
 IMPORTANT: I cannot be held liable for any negative or adverse effects that
-might result from building, installing or using this code. IT IS PROVIDED IN
-AN EXPERIMENTAL STATE ONLY, FOR USE AT YOUR OWN RISK.
+might result from building, installing or using this software. IT IS PROVIDED
+IN AN EXPERIMENTAL STATE ONLY, FOR USE AT YOUR OWN RISK.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
