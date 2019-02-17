@@ -48,7 +48,7 @@ modification, are permitted provided that the following conditions are met:
                                    NOTES
                                    =====
 
-This repository includes code that is either based on (with MODIFICATIONS) or
+1. This repository includes code that is either based on (with MODIFICATIONS) or
 copied directly from code in the vtkFLTK-0.6.1 project on SourceForge,
 copyright (c) 2002 - 2004 Sean McInerney.
 
@@ -99,3 +99,23 @@ here (from the "Copyright.txt" file in that project):
     * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     *
     */
+
+
+2. FLTK
+
+Terms of use for FLTK 1.4 apply as usual, per the "FLTK License".
+
+See the "COPYING" file in the FLTK 1.4 distribution for detials.
+
+Note this project does NOT supply a copy of FLTK code; you must download / install
+it yourself, as necessary, for your use with this project.
+
+
+3. VTK
+
+Terms of use for VTK 8.x apply as usual.
+
+See the "Copyright.txt" file in the (e.g.) VTK 8.1.0 distribution for detials.
+
+Note this project does NOT supply a copy of VTK code; you must download / install
+it yourself, as necessary, for your use with this project.
