@@ -87,7 +87,7 @@ DISCLAIMER
 ==========
 
 The code in this project is being supplied with the hope that it might be
-helpful to those who might want to try to use VTK with FLTK in EXPERIMETAL
+helpful to those who might want to try to use VTK with FLTK in EXPERIMENTAL
 CIRCUMSTANCES ONLY.
 
 I have not tried to debug nor test any and all possibilities. However, most
