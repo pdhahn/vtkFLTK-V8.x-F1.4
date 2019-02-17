@@ -1,9 +1,9 @@
-Project Name
+PROJECT NAME
 ------------
 vtkFLTK-V8.x-F1.4
 
 
-General
+GENERAL
 -------
 This repository contains code which facilitates the use of VTK 8.x to produce
 2D or 3D visualizations in a FLTK 1.4 window (Fl_VTK_Window) that is derived
@@ -55,7 +55,6 @@ this project.
 
 PREREQUISITES
 -------------
-
   o Linux CentOS 6
 
   o GNU g++ compiler version 5.1 toolchain
@@ -68,8 +67,7 @@ PREREQUISITES
 
 
 BUILDING
-========
-
+--------
 After installation of this code and all prerequisites, modify the "Makefile"
 in the top-level project directory with the actual paths for your local FLTK
 and VTK installation, as well as your target installation directory.
@@ -95,8 +93,7 @@ directory, including any example programs.
 
 
 DISCLAIMER
-==========
-
+----------
 The code in this project is being supplied with the hope that it might be
 helpful to those who might want to try to use VTK with FLTK in EXPERIMENTAL
 CIRCUMSTANCES ONLY.
