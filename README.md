@@ -30,8 +30,8 @@ when using code in this project.
 See the LICENSE file in this repository for the license terms.
 
 
-SUPPORTED PLATFORM
-------------------
+PLATFORM(S)
+-----------
 At this time, this implementation only works on Linux, and more specifically,
 on CentOS 6 Linux, and compiled with the GNU gcc 5.1 compiler. Unfortunately,
 I do not have time right now to extend the range of OS and toolchain support,
