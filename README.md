@@ -33,7 +33,7 @@ See the LICENSE file in this repository for the license terms.
 PLATFORM(S)
 -----------
 At this time, this implementation only works on Linux, and more specifically,
-on CentOS 6 Linux, and compiled with the GNU gcc 5.1 compiler. Unfortunately,
+on CentOS 6 Linux, and compiled with the GNU g++ 5.1 compiler. Unfortunately,
 I do not have time right now to extend the range of OS and toolchain support,
 but in my opinion, doing so should be straightforward (at least, on Linux).
 
@@ -70,17 +70,28 @@ PREREQUISITES
 BUILDING
 ========
 
-After installation of this code and all prerequisites, modify the file
-Makefile with the actual paths for your local FLTK and VTK installation,
-as well as your target installation directory.
+After installation of this code and all prerequisites, modify the "Makefile"
+in the top-level project directory with the actual paths for your local FLTK
+and VTK installation, as well as your target installation directory.
 
-Then simply type "make" in the top level project directory. This will
-compile source files and create a library in a subdirectory named "build".
+Then simply type "make" in the top-level project directory. This will compile
+library source files and create the static library "libvtkFLTK-V8xF14.a" in
+a holding subdirectory named "build".
 
-If all goes well, type "make examples".
+If all goes well, type "make install" to copy the library and relevant header
+files into your target installation directory (i.e., under "lib" and "include",
+resp.).
 
-If all still goes well, type "make install" to copy releavnt files into
-your target installation directory.
+To build the examples, type "make examples". Note that the compiled programs
+after this step are located in the various subdirectories under the "Examples"
+subdirectory, not in the "build" subdirectory.
+
+If all still goes well, you can do "make install-examples" to copy the example
+programs into your target installation directory (i.e., under "bin").
+
+Other valid make targets include "clean", "clean-examples", and "clean-install".
+The latter removes all files previously copied into your target installation
+directory, including any example programs.
 
 
 DISCLAIMER
