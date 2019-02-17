@@ -48,7 +48,7 @@ Note this project does NOT supply a copy of suitable FLTK code; you must
 download / install it yourself separately, as necessary, for your use with
 this project.
 
-Likewise, tthis project does NOT supply a copy of suitable VTK code; you must
+Likewise, this project does NOT supply a copy of suitable VTK code; you must
 download / install it yourself separately, as necessary, for your use with
 this project.
 
@@ -71,7 +71,7 @@ BUILDING
 ========
 
 After installation of this code and all prerequisites, modify the file
-Makefile with the actual paths for your local FLTK and VTK intallation,
+Makefile with the actual paths for your local FLTK and VTK installation,
 as well as your target installation directory.
 
 Then simply type "make" in the top level project directory. This will
