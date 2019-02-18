@@ -122,15 +122,15 @@ SetRedrawAfterMouseEvents(), and check it using GetRedrawAfterMouseEvents().
 The initial / default setting is false.
 
 2) Examine the Makefile in each example directory to see how to compile and
-link. The definition and use of the MY_CPPFLAGS_VTK make variable there is a
+link. The definition and use of the MY_CPPFLAGS_VTK make variable there is necessary and a
 way to get VTK 8.x to set up proper internals.
 
-   In addition, in each example, there is one source file containing:
+   In addition, in each example, there is one .cxx source file containing these two lines:
 
         #include "vtkAutoInit.h"
         VTK_MODULE_INIT(vtkFLTKOpenGLRendering);
 
-   This causes VTK to use the vtkFLTK library bridge code that supports
+   This is necessary and causes VTK to use the vtkFLTK library bridge code that supports
 Fl_VTK_Window.
 
 3) Not all examples from the original vtkFLTK project have been copied into
