@@ -70,15 +70,15 @@ this project.
 
 PREREQUISITES
 -------------
-  o Linux CentOS 6
+  * Linux CentOS 6
 
-  o GNU g++ compiler version 5.1 toolchain
+  * GNU g++ compiler version 5.1 toolchain
 
-  o FLTK 1.4 installed / configured for your system
+  * FLTK 1.4 installed / configured for your system
 
-  o VTK 8.x (e.g., 8.1.0) installed / configured for your system
+  * VTK 8.x (e.g., 8.1.0) installed / configured for your system
 
-  o GNU make (gmake)
+  * GNU make (gmake)
 
 
 BUILDING
@@ -117,27 +117,27 @@ derived from vtkAbstractContextItem), such as the VTK chart classes vtkChartXY,
 vtkChartMatrix, etc., especially in conjunction with other scene items
 like crosshairs.
 
-You can enable / disable this feature via the new Fl_VTK_Window public method
+   You can enable / disable this feature via the new Fl_VTK_Window public method
 SetRedrawAfterMouseEvents(), and check it using GetRedrawAfterMouseEvents().
 The initial / default setting is false.
 
-2. Examine the Makefile in each example directory to see how to compile and
+2) Examine the Makefile in each example directory to see how to compile and
 link. The definition and use of the MY_CPPFLAGS_VTK make variable there is a
 way to get VTK 8.x to set up proper internals.
 
-In addition, in each example, there is one source file containing:
+   In addition, in each example, there is one source file containing:
 
-   #include "vtkAutoInit.h"
-   VTK_MODULE_INIT(vtkFLTKOpenGLRendering);
+        #include "vtkAutoInit.h"
+        VTK_MODULE_INIT(vtkFLTKOpenGLRendering);
 
-This causes VTK to use the vtkFLTK library bridge code that supports
+   This causes VTK to use the vtkFLTK library bridge code that supports
 Fl_VTK_Window.
 
-3. Not all examples from the original vtkFLTK project have been copied into
+3) Not all examples from the original vtkFLTK project have been copied into
 this repository. In particular, the "Volume" example has been excluded because
 of the porting challenge (for me) w.r.t. VTK 8.x.
 
-Note the "Canny" example seems to have ported OK, but crashes when a .png image
+   Note the "Canny" example seems to have ported OK, but crashes when a .png image
 file is loaded.
 
 
