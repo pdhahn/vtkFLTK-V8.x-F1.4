@@ -120,7 +120,7 @@ vtkChartMatrix, etc., especially in conjunction with other scene items
 like crosshairs.
 
    You can enable / disable this feature via the new Fl_VTK_Window public method
-`SetRedrawAfterMouseEvents()`, and check it using `GetRedrawAfterMouseEvents(int)`.
+`SetRedrawAfterMouseEvents(int)`, and check it using `GetRedrawAfterMouseEvents()`.
 The initial / default setting is disabled.
 
 2) Examine the Makefile in each example directory to see how to compile and
