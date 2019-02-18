@@ -141,7 +141,8 @@ way to get VTK 8.x to utilize certain required internal modules.
 
    It might also be possible to use a VTK initialization approach based solely on `VTK_MODULE_INIT`
    instead of the `MY_CPPFLAGS_VTK` thing in the Makefile. Namely, in the .cxx source file, try
-   adding the following three lines in lieu of using `MY_CPPFLAGS_VTK` in the Makefile:
+   adding the following three lines after the `#include "vtkAutoInit.h"`in lieu of using
+   `MY_CPPFLAGS_VTK` in the Makefile:
 
        VTK_MODULE_INIT(vtkInteractionStyle);
        VTK_MODULE_INIT(vtkRenderingFreeType);
