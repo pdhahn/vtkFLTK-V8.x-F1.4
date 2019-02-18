@@ -5,7 +5,6 @@ include ../../Makefile.config
 # We only need these flags
 #
 MY_CPPFLAGS_VTK = \
-        -DVTK_IN_VTK    \
         -DvtkRenderingCore_AUTOINIT='3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)' \
         #
 
