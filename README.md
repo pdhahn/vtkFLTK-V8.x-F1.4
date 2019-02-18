@@ -70,9 +70,11 @@ this project.
 
 PREREQUISITES
 -------------
-  * Linux CentOS 6
+  * Linux CentOS 6  (or probably most other flavors of Linux)
 
-  * GNU g++ compiler version 5.1 toolchain
+  * GNU g++ compiler version 5.1 toolchain  (or probably later versions;
+    likely best to use same toolchain that was used to build the FLTK and
+    VTK packages)
 
   * FLTK 1.4 installed / configured for your system
 
