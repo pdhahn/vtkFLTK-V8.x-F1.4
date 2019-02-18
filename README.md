@@ -7,7 +7,8 @@ AUTHORS
 -------
 The author of the original vtkFLTK project software is Sean McInerney.
 
-See https://sourceforge.net/projects/vtkfltk.
+See https://sourceforge.net/projects/vtkfltk and http://vtkfltk.sourceforge.net
+for more information about that original vtkFLTK project.
 
 I (Paul Douglas Hahn, CompIntense HPC, LLC) have made certain modifications to
 that original code, plus I have written some new code as well, for inclusion in
@@ -16,12 +17,13 @@ the current project repository.
 
 GENERAL
 -------
-This repository contains software which facilitates the use of VTK 8.x to produce
-2D or 3D visualizations in a FLTK 1.4 window (Fl_VTK_Window) that is derived
-from a Fl_GL_Window. This means you can use a fairly modern VTK version in modern
-FLTK user interfaces that employ the usual FLTK control widgets like buttons, etc.
+This repository contains "bridge" software designed to make possible the use of
+VTK 8.x to produce 2D or 3D visualizations in a FLTK 1.4 window (Fl_VTK_Window)
+that is derived from a Fl_GL_Window. This means you can use a fairly modern VTK
+version in modern FLTK user interfaces that employ the usual FLTK control widgets
+like buttons, etc.
 
-This repository includes source code that is based on source code copied from the
+This repository includes code that is based on source code copied from the
 vtkFLTK-0.6.1 project on SourceForge, copyright (c) 2002 - 2004 Sean McInerney.
 To various extents, the borrowed code has been modified and extensions made as
 necessary to port it for use with FLTK 1.4 and VTK 8.x. Nevertheless, the original
@@ -105,16 +107,49 @@ The latter removes all files previously copied into your target installation
 directory, including any example programs.
 
 
+PROGRAMMING NOTES
+-----------------
+1. The event handler method Fl_VTK_Window::handle() has been augmented to
+support an optional internal call to Fl_GL_Window::redraw() after mouse
+events (e.g., DRAG, MOVE, or MOUSEWHEEL). This can be useful, for example,
+with VTK displays based on scene graphs containing context items (e.g.,
+derived from vtkAbstractContextItem), such as the VTK chart classes vtkChartXY,
+vtkChartMatrix, etc., especially in conjunction with other scene items
+like crosshairs.
+
+You can enable / disable this feature via the new Fl_VTK_Window public method
+SetRedrawAfterMouseEvents(), and check it using GetRedrawAfterMouseEvents().
+The initial / default setting is false.
+
+2. Examine the Makefile in each example directory to see how to compile and
+link. The definition and use of the MY_CPPFLAGS_VTK make variable there is a
+way to get VTK 8.x to set up proper internals.
+
+In addition, in each example, there is one source file containing:
+
+   #include "vtkAutoInit.h"
+   VTK_MODULE_INIT(vtkFLTKOpenGLRendering);
+
+This causes VTK to use the vtkFLTK library bridge code that supports
+Fl_VTK_Window.
+
+3. Not all examples from the original vtkFLTK project have been copied into
+this repository. In particular, the "Volume" example has been excluded because
+of the porting challenge (for me) w.r.t. VTK 8.x.
+
+Note the "Canny" example seems to have ported OK, but crashes when a .png image
+file is loaded.
+
+
 DISCLAIMER
 ----------
 The software in this project is being supplied with the hope that it might be
 helpful to those who might want to try to use VTK with FLTK in EXPERIMENTAL
 CIRCUMSTANCES ONLY.
 
-I have not tried to debug nor test any and all possibilities. However, most
-of the the sample code in "Examples" appears to work properly (or good enough
-for my own purposes, anyway). I have also not tried to deal with performance
-issues, if any.
+I have not tried to debug or test all the possibilities. However, much of
+the sample code in "Examples" appears to work properly (or good enough for
+my own purposes, anyway).
 
 IMPORTANT: I cannot be held liable for any negative or adverse effects that
 might result from building, installing or using this software. IT IS PROVIDED
