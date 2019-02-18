@@ -64,7 +64,7 @@ RM  ?= rm
 CP  ?= cp
 
 
-.PHONY: all examples install install-examples clean clean examples clean-all
+.PHONY: all examples install install-examples clean clean-examples clean-all
 
 
 
