@@ -122,16 +122,30 @@ SetRedrawAfterMouseEvents(), and check it using GetRedrawAfterMouseEvents().
 The initial / default setting is false.
 
 2) Examine the Makefile in each example directory to see how to compile and
-link. The definition and use of the MY_CPPFLAGS_VTK make variable there is necessary and a
-way to get VTK 8.x to set up proper internals.
+link. The definition and use of the `MY_CPPFLAGS_VTK` make variable there is a
+way to get VTK 8.x to utilize certain required internal modules.
+
+        MY_CPPFLAGS_VTK = \
+            -DvtkRenderingCore_AUTOINIT='3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)' \
+            #
+        ...
+        $(CXX) $(CXXFLAGS) $(CXX_OPTS) -o $@ -c $< $(INCLUDES) $(MY_CPPFLAGS_VTK)
 
    In addition, in each example, there is one .cxx source file containing these two lines:
 
         #include "vtkAutoInit.h"
         VTK_MODULE_INIT(vtkFLTKOpenGLRendering);
 
-   This is necessary and causes VTK to use the vtkFLTK library bridge code that supports
-Fl_VTK_Window.
+   This is necessary and causes VTK to utilize the vtkFLTK library bridge code that supports
+   Fl_VTK_Window.
+
+   It might also be possible to use a VTK initialization approach based solely on `VTK_MODULE_INIT`
+   instead of the `MY_CPPFLAGS_VTK` thing in the Makefile. Namely, in the .cxx source file, try
+   adding the following three lines in lieu of using `MY_CPPFLAGS_VTK` in the Makefile:
+
+       VTK_MODULE_INIT(vtkInteractionStyle);
+       VTK_MODULE_INIT(vtkRenderingFreeType);
+       VTK_MODULE_INIT(vtkRenderingOpenGL2);
 
 3) Not all examples from the original vtkFLTK project have been copied into
 this repository. In particular, the "Volume" example has been excluded because
