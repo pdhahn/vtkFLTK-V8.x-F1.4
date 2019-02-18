@@ -73,7 +73,7 @@ PREREQUISITES
   * Linux CentOS 6  (or probably most other flavors of Linux)
 
   * GNU g++ compiler version 5.1 toolchain  (or probably later versions;
-    likely best to use same toolchain that was used to build the FLTK and
+    likely best to use same toolchain that was used to build your FLTK and
     VTK packages)
 
   * FLTK 1.4 installed / configured for your system
@@ -111,8 +111,8 @@ directory, including any example programs.
 
 PROGRAMMING NOTES
 -----------------
-1. The event handler method Fl_VTK_Window::handle() has been augmented to
-support an optional internal call to Fl_GL_Window::redraw() after mouse
+1. The event handler method `Fl_VTK_Window::handle()` has been augmented to
+support an optional internal call to `Fl_GL_Window::redraw()` after mouse
 events (e.g., DRAG, MOVE, or MOUSEWHEEL). This can be useful, for example,
 with VTK displays based on scene graphs containing context items (e.g.,
 derived from vtkAbstractContextItem), such as the VTK chart classes vtkChartXY,
@@ -120,8 +120,8 @@ vtkChartMatrix, etc., especially in conjunction with other scene items
 like crosshairs.
 
    You can enable / disable this feature via the new Fl_VTK_Window public method
-SetRedrawAfterMouseEvents(), and check it using GetRedrawAfterMouseEvents().
-The initial / default setting is false.
+`SetRedrawAfterMouseEvents()`, and check it using `GetRedrawAfterMouseEvents(int)`.
+The initial / default setting is disabled.
 
 2) Examine the Makefile in each example directory to see how to compile and
 link. The definition and use of the `MY_CPPFLAGS_VTK` make variable there is a
