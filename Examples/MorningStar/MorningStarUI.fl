@@ -1,0 +1,311 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0105 
+header_name {.h} 
+code_name {.cxx}
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: MorningStarUI.fl,v 1.13 2004/05/13 18:37:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {public
+} 
+
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: MorningStarUI.fl,v 1.13 2004/05/13 18:37:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {} 
+
+decl {\#include "MorningStarBase.h"} {public
+} 
+
+decl {\#include "Fl_VTK_Window.H"} {} 
+
+decl {\#include "vtkObjectFactory.h"} {} 
+
+decl {const char* instructions =
+"<key>: <action>\\n"
+"    3: toggle stereo mode\\n"
+"  j|t: toggle  joystick | trackball modes\\n"
+"  w|s: toggle wireframe | surface modes\\n"
+"  c|a: toggle    camera | actor modes\\n"
+"    p: pick\\n"
+"    r: reset";} {} 
+
+decl {/* fool fluid */
+vtkCxxRevisionMacro (MorningStarUI, "$Revision: 1.13 $");} {} 
+
+decl {/* fool fluid */
+vtkStandardNewMacro (MorningStarUI);} {} 
+
+class VTK_EXPORT MorningStarUI {open : {public MorningStarBase}
+} {
+  decl {static MorningStarUI* New(void);} {public
+  }
+  decl {vtkTypeMacro(MorningStarUI, MorningStarBase);} {public
+  }
+  Function {MorningStarUI()} {open
+  } {
+    Fl_Window mConeWindow {
+      label MorningStar
+      callback {exit(0);}
+      private xywh {94 243 430 160} type Double box PLASTIC_THIN_DOWN_BOX labelcolor 0 align 0 hide resizable
+    } {
+      Fl_Box mConeView {
+        private xywh {315 5 110 150} labelcolor 0 resizable
+        class Fl_VTK_Window
+      }
+      Fl_Group {} {open
+        xywh {5 5 305 150}
+      } {
+        Fl_Box mInstructionsBox {
+          private xywh {5 5 305 100} box PLASTIC_UP_BOX labelfont 4 labelsize 12 labelcolor 0 align 20 resizable
+          code0 {o->label(instructions);}
+        }
+        Fl_Group {} {open
+          private xywh {5 110 305 45} box PLASTIC_UP_BOX labelcolor 0
+        } {
+          Fl_Button {} {
+            label {show mace}
+            callback {this->ShowMace();}
+            private xywh {10 115 50 35} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 2 selection_color 10 labelfont 1 labelsize 12 labelcolor 0 align 144
+          }
+          Fl_Button {} {
+            label {hide mace}
+            callback {this->HideMace();}
+            private xywh {65 115 50 35} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 4 selection_color 12 labelfont 1 labelsize 12 labelcolor 0 align 144
+          }
+          Fl_Button {} {
+            label {show cone}
+            callback {this->mConeView->show();}
+            private xywh {120 115 50 35} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 2 selection_color 10 labelfont 1 labelsize 12 labelcolor 0 align 144
+          }
+          Fl_Button {} {
+            label {hide cone}
+            callback {this->mConeView->hide();}
+            private xywh {175 115 50 35} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 4 selection_color 12 labelfont 1 labelsize 12 labelcolor 0 align 144
+          }
+          Fl_Box {} {
+            xywh {230 115 20 35} labeltype NO_LABEL hide resizable
+          }
+          Fl_Button {} {
+            label quit
+            callback {exit(0);}
+            private xywh {255 115 50 35} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 1 selection_color 9 labelfont 1 labelcolor 0 align 16
+          }
+        }
+      }
+    }
+    Fl_Window mMaceWindow {
+      label MorningStar
+      private xywh {587 438 300 420} type Double box PLASTIC_THIN_DOWN_BOX labelcolor 0 align 0 resizable non_modal visible
+    } {
+      Fl_Box mMaceView {
+        private xywh {5 5 290 290} labelcolor 0 resizable
+        class Fl_VTK_Window
+      }
+      Fl_Group {} {open
+        private xywh {5 300 290 116} box PLASTIC_UP_BOX labelcolor 0
+      } {
+        Fl_Value_Slider mThetaSlider {
+          label theta
+          callback {if(this->Mace != NULL) {
+  this->SetThetaResolution(int(this->mThetaSlider->value()));
+  this->UpdateMaceView();
+}}
+          private xywh {38 305 108 16} type Horizontal box PLASTIC_THIN_DOWN_BOX labelfont 1 labelsize 10 labelcolor 0 align 4 minimum 3 maximum 64 step 1 value 8 textcolor 0
+        }
+        Fl_Value_Slider mPhiSlider {
+          label phi
+          callback {if(this->Mace != NULL) {
+  this->SetPhiResolution(int(this->mPhiSlider->value()));
+  this->UpdateMaceView();
+}}
+          private xywh {38 323 108 16} type Horizontal box PLASTIC_THIN_DOWN_BOX labelfont 1 labelsize 10 labelcolor 0 align 4 minimum 3 maximum 64 step 1 value 8 textcolor 0
+        }
+        Fl_Value_Slider mResSlider {
+          label res
+          callback {if(this->Mace != NULL) {
+  this->SetSpikeResolution(int(this->mResSlider->value()));
+  this->UpdateMaceView();
+}}
+          private xywh {38 341 108 16} type Horizontal box PLASTIC_THIN_DOWN_BOX labelfont 1 labelsize 10 labelcolor 0 align 4 minimum 1 maximum 48 step 1 value 8 textcolor 0
+        }
+        Fl_Value_Slider mRadiusSlider {
+          label radius
+          callback {if(this->Mace != NULL) {
+  this->SetSpikeRadius(this->mRadiusSlider->value());
+  this->UpdateMaceView();
+}}
+          private xywh {184 305 108 16} type Horizontal box PLASTIC_THIN_DOWN_BOX labelfont 1 labelsize 10 labelcolor 0 align 4 maximum 8 value 0.5 textcolor 0
+        }
+        Fl_Value_Slider mHeightSlider {
+          label height
+          callback {if(this->Mace != NULL) {
+  this->SetSpikeHeight(this->mHeightSlider->value());
+  this->UpdateMaceView();
+}}
+          private xywh {184 323 108 16} type Horizontal box PLASTIC_THIN_DOWN_BOX labelfont 1 labelsize 10 labelcolor 0 align 4 maximum 8 value 1 textcolor 0
+        }
+        Fl_Roller mScaleRoller {
+          label scale
+          callback {if(this->Mace != NULL) {
+  this->SetScaleFactor(this->mScaleRoller->value());
+  this->UpdateMaceView();
+}}
+          private xywh {184 341 108 16} type Horizontal box PLASTIC_THIN_DOWN_BOX labelfont 1 labelsize 10 labelcolor 0 align 4 maximum 10 value 0.25
+        }
+        Fl_Group {} {
+          label {sphere color}
+          private xywh {10 371 140 45} labelfont 1 labelsize 10 labelcolor 0
+        } {
+          Fl_Slider mRedSphereSlider {
+            label R
+            callback {if(this->Mace != NULL) {
+  this->SetSphereColor( this->mRedSphereSlider->value(),
+                               this->mGreenSphereSlider->value(),
+                               this->mBlueSphereSlider->value() );
+  this->UpdateMaceView();
+}}
+            private xywh {24 372 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 1 labelfont 5 labelsize 12 labelcolor 1 align 4 step 0.01 value 0.8
+          }
+          Fl_Slider mGreenSphereSlider {
+            label G
+            callback {if(this->Mace != NULL) {
+  this->SetSphereColor( this->mRedSphereSlider->value(),
+                               this->mGreenSphereSlider->value(),
+                               this->mBlueSphereSlider->value() );
+  this->UpdateMaceView();
+}}
+            private xywh {24 382 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 2 labelfont 5 labelsize 12 labelcolor 61 align 4 step 0.01 value 0.8
+          }
+          Fl_Slider mBlueSphereSlider {
+            label B
+            callback {if(this->Mace != NULL) {
+  this->SetSphereColor( this->mRedSphereSlider->value(),
+                               this->mGreenSphereSlider->value(),
+                               this->mBlueSphereSlider->value() );
+  this->UpdateMaceView();
+}}
+            private xywh {24 392 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 4 labelfont 5 labelsize 12 labelcolor 4 align 4 step 0.01 value 0.4
+          }
+          Fl_Slider mSphereOpacitySlider {
+            label A
+            callback {if(this->Mace != NULL) {
+  this->SetSphereOpacity(this->mSphereOpacitySlider->value());
+  this->UpdateMaceView();
+}}
+            xywh {24 402 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 24 labelfont 5 labelsize 12 labelcolor 24 align 4 step 0.01 value 0.66
+          }
+        }
+        Fl_Group {} {
+          label {spike color}
+          private xywh {150 371 141 45} labelfont 1 labelsize 10 labelcolor 0
+        } {
+          Fl_Slider mRedSpikeSlider {
+            label R
+            callback {if(this->Mace != NULL) {
+  this->SetSpikeColor( this->mRedSpikeSlider->value(),
+                              this->mGreenSpikeSlider->value(),
+                              this->mBlueSpikeSlider->value() );
+  this->UpdateMaceView();
+}}
+            private xywh {151 372 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 1 labelfont 5 labelsize 12 labelcolor 1 align 8 step 0.01 value 0.4
+          }
+          Fl_Slider mGreenSpikeSlider {
+            label G
+            callback {if(this->Mace != NULL) {
+  this->SetSpikeColor( this->mRedSpikeSlider->value(),
+                              this->mGreenSpikeSlider->value(),
+                              this->mBlueSpikeSlider->value() );
+  this->UpdateMaceView();
+}}
+            private xywh {151 382 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 2 labelfont 5 labelsize 12 labelcolor 61 align 8 step 0.01 value 0.6
+          }
+          Fl_Slider mBlueSpikeSlider {
+            label B
+            callback {if(this->Mace != NULL) {
+  this->SetSpikeColor( this->mRedSpikeSlider->value(),
+                              this->mGreenSpikeSlider->value(),
+                              this->mBlueSpikeSlider->value() );
+  this->UpdateMaceView();
+}}
+            private xywh {151 392 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 4 labelfont 5 labelsize 12 labelcolor 4 align 8 step 0.01 value 0.8
+          }
+          Fl_Slider mSpikeOpacitySlider {
+            label A
+            callback {if(this->Mace != NULL) {
+  this->SetSpikeOpacity(this->mSpikeOpacitySlider->value());
+  this->UpdateMaceView();
+}}
+            private xywh {151 403 125 10} type {Horz Knob} box PLASTIC_THIN_DOWN_BOX color 24 labelfont 5 labelsize 12 labelcolor 24 align 8 step 0.01 value 1
+          }
+        }
+      }
+    }
+    code {//this->mMaceWindow->init_sizes();} {}
+    code {this->SetConeWindow(this->mConeWindow);} {}
+    code {this->SetConeView(this->mConeView);} {}
+    code {this->SetMaceWindow(this->mMaceWindow);} {}
+    code {this->SetMaceView(this->mMaceView);} {}
+  }
+  Function {Check(void)} {return_type void
+  } {
+    code {Fl::check();} {}
+  }
+  Function {ReceiveMaceParam(void)} {return_type void
+  } {
+    codeblock {if (this->Mace != NULL)} {open
+    } {
+      code {double dtmp;
+int    itmp;
+this->GetThetaResolution(itmp);
+this->mThetaSlider->value(itmp);
+this->GetPhiResolution(itmp);
+this->mPhiSlider->value(itmp);
+this->GetSpikeResolution(itmp);
+this->mResSlider->value(itmp);
+this->GetSpikeRadius(dtmp);
+this->mRadiusSlider->value(dtmp);
+this->GetSpikeHeight(dtmp);
+this->mHeightSlider->value(dtmp);
+this->GetScaleFactor(dtmp);
+this->mScaleRoller->value(dtmp);} {}
+      code {this->SetSphereColor( this->mRedSphereSlider->value(),
+                             this->mGreenSphereSlider->value(),
+                             this->mBlueSphereSlider->value() );
+this->SetSpikeColor( this->mRedSpikeSlider->value(),
+                             this->mBlueSpikeSlider->value(),
+                             this->mBlueSpikeSlider->value() );} {}
+      code {this->SetSphereOpacity(this->mSphereOpacitySlider->value());
+this->SetSpikeOpacity(this->mSpikeOpacitySlider->value());} {}
+    }
+  }
+  decl {MorningStarUI(const MorningStarUI&); // Not Implemented.} {}
+  decl {MorningStarUI& operator=(const MorningStarUI&); // Not Implemented.} {}
+  decl {friend void MorningStarUIDummy(void);} {}
+} 
+
+Function {MorningStarUIDummy(void)} {return_type void
+} {
+  code {// Silences compiler warnings about private destructor and no friends.} {}
+} 

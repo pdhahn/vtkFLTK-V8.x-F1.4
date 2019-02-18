@@ -1,0 +1,134 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0104 
+header_name {.h} 
+code_name {.cxx}
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: ContourUI.fl,v 1.7 2004/05/13 18:37:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {public
+} 
+
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: ContourUI.fl,v 1.7 2004/05/13 18:37:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {} 
+
+decl {\#include "ContourBase.h"} {public
+} 
+
+decl {\#include "Fl_VTK_Window.H"} {} 
+
+decl {\#include "vtkObjectFactory.h"} {} 
+
+decl {/* fool fluid */
+vtkCxxRevisionMacro (ContourUI, "$Revision: 1.7 $");} {} 
+
+decl {/* fool fluid */
+vtkStandardNewMacro (ContourUI);} {} 
+
+class VTK_EXPORT ContourUI {open : {public ContourBase}
+} {
+  decl {static ContourUI* New(void);} {public
+  }
+  decl {vtkTypeMacro(ContourUI, ContourBase);} {public
+  }
+  Function {ContourUI()} {open
+  } {
+    Fl_Window mWindow {
+      label {Contour View}
+      callback {exit(0);} open
+      private xywh {385 335 264 326} type Double color 16 align 0 hide resizable
+    } {
+      Fl_Box mView {
+        private xywh {4 4 256 256} labelcolor 0
+        code0 {o->resizable(*o);}
+        class Fl_VTK_Window
+      }
+      Fl_Group {} {open
+        private xywh {4 264 256 28} box PLASTIC_UP_BOX
+      } {
+        Fl_Value_Input IsoInput {
+          label Iso
+          user_data this
+          callback IsoInputCb
+          xywh {32 268 48 20} box PLASTIC_DOWN_BOX labeltype SHADOW_LABEL labelfont 1 labelcolor 0 when 4 maximum 16384 step 1 value 1250 textfont 4
+        }
+        Fl_Check_Button ContourToggle {
+          user_data this
+          callback ContourToggleCb
+          xywh {82 268 20 20} down_box PLASTIC_DOWN_BOX value 1 selection_color 0 labeltype NO_LABEL labelcolor 0 align 0
+        }
+        Fl_Button {} {
+          label {Save series}
+          user_data this
+          callback SaveSeriesCb
+          private xywh {102 268 76 20} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 13 selection_color 5 labelsize 12 labelcolor 0 align 144
+        }
+        Fl_Button {} {
+          label {Save image}
+          user_data this
+          callback SaveImageCb
+          private xywh {180 268 76 20} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 12 selection_color 4 labelsize 12 labelcolor 0 align 144
+        }
+      }
+      Fl_Box {} {
+        private xywh {2 2 260 260} labeltype NO_LABEL hide deactivate resizable
+      }
+      Fl_Group {} {open
+        private xywh {4 294 256 28} box PLASTIC_UP_BOX
+      } {
+        Fl_Progress Progress {
+          label progress
+          xywh {8 298 248 20} box PLASTIC_DOWN_BOX selection_color 3 labelsize 12 labelcolor 15
+          code0 {o->minimum(0.0);}
+          code1 {o->maximum(1.0);}
+        }
+      }
+    }
+    code {this->SetFltkWindow(this->mWindow);} {}
+    code {this->SetVtkWindow(this->mView);} {}
+  }
+  Function {GetView()} {return_type {Fl_VTK_Window*}
+  } {
+    code {return this->mView;} {}
+  }
+  Function {Check(void)} {return_type void
+  } {
+    code {Fl::check();} {}
+  }
+  Function {InitIsoInput(void)} {open private return_type void
+  } {
+    code {this->IsoInput->value(this->GetContourValue());} {}
+    code {this->Check();} {}
+  }
+  decl {ContourUI(const ContourUI&); // Not implemented.} {}
+  decl {void operator=(const ContourUI&); // Not implemented.} {}
+  decl {friend void ContourUIDummy(void);} {}
+} 
+
+Function {ContourUIDummy(void)} {return_type void
+} {
+  code {// Silences compiler warnings about private destructor and no friends.} {}
+} 

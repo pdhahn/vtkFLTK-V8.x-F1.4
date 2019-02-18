@@ -1,0 +1,119 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0104 
+header_name {.h} 
+code_name {.cxx}
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: MCasesUI.fl,v 1.6 2004/05/13 18:37:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {public
+} 
+
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: MCasesUI.fl,v 1.6 2004/05/13 18:37:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {} 
+
+decl {\#include "MCasesBase.h"} {public
+} 
+
+decl {\#include "Fl_VTK_Window.H"} {} 
+
+decl {\#include "vtkObjectFactory.h"} {} 
+
+decl {class Fl_VTK_Window;} {public
+} 
+
+decl {/* fool fluid */
+vtkCxxRevisionMacro (MCasesUI, "$Revision: 1.6 $");} {} 
+
+decl {/* fool fluid */
+vtkStandardNewMacro (MCasesUI);} {} 
+
+class VTK_EXPORT MCasesUI {open : {public MCasesBase}
+} {
+  decl {static MCasesUI* New(void);} {public
+  }
+  decl {vtkTypeMacro(MCasesUI, MCasesBase);} {public
+  }
+  Function {MCasesUI()} {open
+  } {
+    Fl_Window mWindow {
+      label {Marching Cubes Cases}
+      callback {exit(0);} open
+      private xywh {422 498 296 328} type Double color 16 labelcolor 0 align 0 hide resizable
+    } {
+      Fl_Box mView {
+        private xywh {4 4 288 288} labeltype NO_LABEL labelcolor 0
+        code0 {o->resizable(*o);}
+        class Fl_VTK_Window
+      }
+      Fl_Group {} {open
+        private xywh {4 296 288 28} box PLASTIC_UP_BOX labeltype NO_LABEL labelcolor 0 align 0
+      } {
+        Fl_Value_Input mCaseInput {
+          label Case
+          user_data this
+          callback CaseInputCb
+          xywh {42 300 36 20} box PLASTIC_DOWN_BOX color 32 labelfont 1 labelsize 12 labelcolor 0 when 4 maximum 255 step 1 value 9 textfont 4 textcolor 3
+        }
+        Fl_Roller mCaseRoller {
+          user_data this
+          callback CaseRollerCb
+          xywh {82 300 158 20} type Horizontal box PLASTIC_DOWN_BOX labeltype NO_LABEL labelcolor 0 align 0 maximum 255 step 1 value 9
+        }
+        Fl_Light_Button {} {
+          label AA
+          user_data this
+          callback AntiAliasToggleCb
+          private xywh {244 300 44 20} box PLASTIC_UP_BOX labeltype SHADOW_LABEL labelfont 1 labelsize 10 labelcolor 0 align 16
+        }
+      }
+      Fl_Box {} {
+        private xywh {2 2 292 292} labeltype NO_LABEL labelcolor 0 hide deactivate resizable
+      }
+    }
+    code {this->SetFltkWindow(this->mWindow);} {}
+    code {this->SetVtkWindow(this->mView);} {}
+  }
+  Function {GetView()} {return_type {Fl_VTK_Window*}
+  } {
+    code {return this->mView;} {}
+  }
+  Function {UpdateView()} {return_type void
+  } {
+    codeblock {if (this->mView != NULL)} {open
+    } {
+      code {this->mView->Update();} {}
+    }
+  }
+  decl {MCasesUI(const MCasesUI&); // Not implemented.} {}
+  decl {void operator=(const MCasesUI&); // Not implemented.} {}
+  decl {friend void MCasesUIDummy(void);} {}
+} 
+
+Function {MCasesUIDummy(void)} {return_type void
+} {
+  code {// Silences compiler warnings about private destructor and no friends.} {}
+} 

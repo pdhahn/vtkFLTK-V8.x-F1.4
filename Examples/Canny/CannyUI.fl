@@ -1,0 +1,166 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0105 
+header_name {.h} 
+code_name {.cxx}
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: CannyUI.fl,v 1.4 2004/05/27 00:14:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {public
+} 
+
+decl {/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+ *
+ * $Id: CannyUI.fl,v 1.4 2004/05/27 00:14:49 xpxqx Exp $
+ *
+ * Copyright (c) 2002 - 2004 Sean McInerney
+ * All rights reserved.
+ *
+ * See Copyright.txt or http://vtkfltk.sourceforge.net/Copyright.html
+ * for details.
+ *
+ *    This software is distributed WITHOUT ANY WARRANTY; without even 
+ *    the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+ *    PURPOSE.  See the above copyright notice for more information.
+ *
+ */} {} 
+
+decl {\#include "CannyBase.h"} {public
+} 
+
+decl {\#include "Fl_VTK_Window.H"} {} 
+
+decl {\#include "vtkObjectFactory.h"} {} 
+
+decl {/* fool fluid */
+vtkCxxRevisionMacro (CannyUI, "$Revision: 1.4 $");} {} 
+
+decl {/* fool fluid */
+vtkStandardNewMacro (CannyUI);} {} 
+
+class VTK_EXPORT CannyUI {open : {public CannyBase}
+} {
+  decl {static CannyUI* New(void);} {public
+  }
+  decl {vtkTypeRevisionMacro(CannyUI, CannyBase);} {public
+  }
+  Function {CannyUI()} {open
+  } {
+    Fl_Window mWindow {
+      label Canny
+      callback {exit(0);} open
+      private xywh {212 191 300 330} type Double box PLASTIC_THIN_DOWN_BOX labelcolor 0 align 0 hide resizable
+    } {
+      Fl_Box mView {
+        private xywh {4 4 292 240} labeltype NO_LABEL labelcolor 0 resizable
+        class Fl_VTK_Window
+      }
+      Fl_Group {} {open
+        private xywh {4 248 292 78} box PLASTIC_UP_BOX labeltype NO_LABEL labelcolor 0
+      } {
+        Fl_Group mGroup1 {open
+          private xywh {8 252 210 48} labeltype NO_LABEL labelcolor 0 align 0
+        } {
+          Fl_Value_Input {} {
+            label {line width}
+            user_data this
+            callback CannyLineWidthCb
+            private tooltip {line width} xywh {68 252 36 24} box PLASTIC_DOWN_BOX labelsize 12 labelcolor 0 when 4 maximum 32 step 0.1 value 1 textfont 5 textsize 12
+          }
+          Fl_Value_Input {} {
+            label smoothing
+            user_data this
+            callback CannySmoothingRadiusFactorCb
+            private tooltip {gaussian smoothing radius factor} xywh {68 276 36 24} box PLASTIC_DOWN_BOX labelsize 12 labelcolor 0 align 132 when 4 maximum 10 step 0.5 value 0.5 textfont 5 textsize 12
+          }
+          Fl_Button {} {
+            label fg
+            user_data this
+            callback CannyForegroundCb
+            private tooltip {foreground color} xywh {106 252 24 24} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 32 selection_color 10 labelfont 5 labelsize 12 labelcolor 55 align 80
+          }
+          Fl_Button {} {
+            label bg
+            user_data this
+            callback CannyBackgroundCb
+            private tooltip {background color} xywh {106 276 24 24} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 55 selection_color 10 labelfont 5 labelsize 12 labelcolor 32 align 144
+          }
+          Fl_Check_Button {} {
+            label {show edgels}
+            user_data this
+            callback CannyEdgelVisibilityCb
+            private xywh {132 252 24 24} down_box DOWN_BOX value 1 selection_color 0 labelsize 12 labelcolor 0
+          }
+          Fl_Check_Button {} {
+            label {show image}
+            user_data this
+            callback CannyImageVisibilityCb
+            private xywh {132 276 24 24} down_box DOWN_BOX value 1 selection_color 0 labelsize 12 labelcolor 0
+          }
+        }
+        Fl_Box {} {
+          private xywh {218 252 10 48} labeltype NO_LABEL labelcolor 0 hide resizable
+        }
+        Fl_Group mGroup2 {open
+          private xywh {228 252 64 48} labeltype NO_LABEL labelcolor 0
+        } {
+          Fl_Button {} {
+            label Load
+            user_data this
+            callback CannyLoadCb
+            private tooltip {load image} xywh {228 252 38 24} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 2 selection_color 10 labelfont 1 labelsize 12 labelcolor 0 align 16
+          }
+          Fl_Button {} {
+            label Save
+            user_data this
+            callback CannySaveCb
+            private tooltip {save image / data} xywh {228 276 38 24} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 4 selection_color 12 labelfont 1 labelsize 12 labelcolor 0 align 16
+          }
+          Fl_Button {} {
+            label {@\#1+}
+            callback {exit(0);}
+            private tooltip exit xywh {268 252 24 48} box PLASTIC_UP_BOX down_box PLASTIC_DOWN_BOX color 1 selection_color 9 labeltype EMBOSSED_LABEL labelfont 5 labelsize 17 labelcolor 0 align 80
+          }
+        }
+        Fl_Progress Progress {
+          label progress
+          xywh {8 302 284 20} box PLASTIC_DOWN_BOX selection_color 3 labelsize 12 labelcolor 15
+          code0 {o->minimum(0.0);}
+          code1 {o->maximum(1.0);}
+        }
+      }
+    }
+    code {this->SetFltkWindow(this->mWindow);} {}
+    code {this->SetVtkWindow(this->mView);} {}
+  }
+  Function {GetView()} {return_type {Fl_VTK_Window*}
+  } {
+    code {return this->mView;} {}
+  }
+  Function {Check(void)} {return_type void
+  } {
+    code {Fl::check();} {}
+  }
+  Function {Flush(void)} {return_type void
+  } {
+    code {Fl::flush();} {}
+  }
+  decl {CannyUI(const CannyUI&); // Not implemented.} {}
+  decl {void operator=(const CannyUI&); // Not implemented.} {}
+  decl {friend void CannyUIDummy(void);} {}
+} 
+
+Function {CannyUIDummy(void)} {return_type void
+} {
+  code {// Silences compiler warnings about private destructor and no friends.} {}
+} 
