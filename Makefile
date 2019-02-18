@@ -161,7 +161,7 @@ build/Fl_VTK_Window.o : src/Fl_VTK_Window.cxx src/Fl_VTK_Window.H vtkFLTKConfigu
 build/vtkFLTK%.o : src/vtkFLTK%.cxx src/vtkFLTK%.h vtkFLTKConfigure.h
 	@mkdir -p build
 	@chmod a+wrx build
-	$(CXX) $(CXXFLAGS) $(CXX_OPTgS) $(INCLUDES) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) $(CXX_OPTS) $(INCLUDES) -o $@ -c $<
 
 
 
