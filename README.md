@@ -157,6 +157,9 @@ of the porting challenge (for me) w.r.t. VTK 8.x.
    Note the "Canny" example seems to have ported OK, but crashes when a .png image
 file is loaded.
 
+   The "Contour" example requires that the environment variable `VTK_DATA_ROOT` be defined as
+   the path to standard VTK example data (e.g., download via git clone of git://vtk.org/VTKData.git).
+
 
 DISCLAIMER
 ----------
