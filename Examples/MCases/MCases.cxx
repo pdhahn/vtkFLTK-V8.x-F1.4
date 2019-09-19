@@ -78,10 +78,12 @@ AntiAliasToggleCb (Fl_Light_Button* aButton, void* aPtr)
   if ((gui = reinterpret_cast<MCasesUI*>(aPtr)) == NULL)
     return;
 
+#if VTK_MINOR_VERSION < 2
   if (aButton->value())
     gui->GetView()->GetRenderWindow()->SetAAFrames(7);
   else
     gui->GetView()->GetRenderWindow()->SetAAFrames(0);
+#endif
 
   gui->UpdateView();
 }

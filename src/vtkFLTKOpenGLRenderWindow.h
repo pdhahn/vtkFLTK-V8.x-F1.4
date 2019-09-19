@@ -225,19 +225,28 @@ public:
    * These methods can only be used to set \c Fl_Window subclasses
    * as parent since an \c Fl_Group is never associated with an XID.
    */
-  void  SetDisplayId (void* id);
-  void  SetWindowId (void* id);
-  void  SetParentId (void* id);
-  void* GetGenericDisplayId (void);
-  void* GetGenericWindowId (void);
-  void* GetGenericParentId (void);
-  void* GetGenericContext (void);
-  void* GetGenericDrawable (void);
+  void  SetDisplayId (void* id) override;
+  void  SetWindowId (void* id) override;
+  void  SetParentId (void* id) override;
+  void* GetGenericDisplayId (void) override;
+  void* GetGenericWindowId (void) override;
+  void* GetGenericParentId (void) override;
+  void* GetGenericContext (void) override;
+  void* GetGenericDrawable (void) override;
   void  SetDisplayInfo (char* id);
-  void  SetWindowInfo (char* id);
-  void  SetParentInfo (char* id);
-  void  SetNextWindowId (void* id);
-  void  SetNextWindowInfo (char* id);
+#if VTK_MINOR_VERSION > 1
+  void  SetWindowInfo (const char* id) override;
+  void  SetParentInfo (const char* id) override;
+#else
+  void  SetWindowInfo (char* id) override;
+  void  SetParentInfo (char* id) override;
+#endif
+  void  SetNextWindowId (void* id) override;
+#if VTK_MINOR_VERSION > 1
+  void  SetNextWindowInfo (const char* id) override;
+#else
+  void  SetNextWindowInfo (char* id) override;
+#endif
   /*@}*/
 
 protected:

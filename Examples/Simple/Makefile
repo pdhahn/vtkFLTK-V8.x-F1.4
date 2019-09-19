@@ -8,7 +8,7 @@ MY_CPPFLAGS_VTK = \
 MY_LDFLAGS_FLTK = $(shell fltk-config --use-gl --ldflags)
 
 
-INCLUDES = -I. -I../.. -I../../src -I$(FLTK_DIR)/include  -I$(VTK_DIR)/include/vtk-8.1
+INCLUDES = -I. -I../.. -I../../src -I$(FLTK_DIR)/include  -I$(VTK_DIR)/include/vtk-$(VTK_VERSION)
 
 
 

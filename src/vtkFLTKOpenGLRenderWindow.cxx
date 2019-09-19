@@ -1089,7 +1089,11 @@ vtkFLTKOpenGLRenderWindow::SetWindowId (void* a)
 }
 
 void
+#if VTK_MINOR_VERSION > 1
+vtkFLTKOpenGLRenderWindow::SetWindowInfo (const char* aInfo)
+#else
 vtkFLTKOpenGLRenderWindow::SetWindowInfo (char* aInfo)
+#endif
 {
   // Ensure existence of the default display connection.
   this->CheckDisplayConnection();
@@ -1101,7 +1105,11 @@ vtkFLTKOpenGLRenderWindow::SetWindowInfo (char* aInfo)
 }
 
 void
+#if VTK_MINOR_VERSION > 1
+vtkFLTKOpenGLRenderWindow::SetParentInfo (const char* a)
+#else
 vtkFLTKOpenGLRenderWindow::SetParentInfo (char* a)
+#endif
 {
   // Ensure existence of the default display connection.
   this->CheckDisplayConnection();
@@ -1120,7 +1128,11 @@ vtkFLTKOpenGLRenderWindow::SetNextWindowId (void* vtkNotUsed(a))
 }
 
 void
+#if VTK_MINOR_VERSION > 1
+vtkFLTKOpenGLRenderWindow::SetNextWindowInfo (const char* a)
+#else
 vtkFLTKOpenGLRenderWindow::SetNextWindowInfo (char* a)
+#endif
 {
   long tmp;
   sscanf(a, "%ld", &tmp);
